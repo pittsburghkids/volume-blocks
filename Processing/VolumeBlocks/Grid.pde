@@ -4,7 +4,7 @@ class Grid {
   int zSize;
   int xMin, xMax, yMin, yMax, zMin, zMax;
   
-  int cellSize= 12;
+  int cellSize= 60;
   
   int maxCubes= 10000;
   Cube[] cubes= new Cube[maxCubes];
