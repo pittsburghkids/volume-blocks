@@ -13,6 +13,8 @@ import org.openkinect.processing.*;
 Kinect2 kinect;
 
 Grid grid= new Grid(30,30,30);
+Dial dial= new Dial();
+PFont font;
 
 // Angles for rotation
 float a = 0;
@@ -27,12 +29,16 @@ void setup() {
   kinect = new Kinect2(this);
   kinect.initDepth();
   kinect.initDevice();
+  
+  font= loadFont("TwCenMTPro-SemiBold-60.vlw");
+  textFont(font);
+  dial.init();
 
 }
 
 void draw() {
 
-  background(10);
+  background(107,95,77);
   fill(255);
   
   // Set up some different colored lights
@@ -41,7 +47,7 @@ void draw() {
 
   // Raise overall light in scene 
   ambientLight(100, 100, 100); 
-
+  
   // Get the raw depth as array of integers
   int[] depth = kinect.getRawDepth();
 
@@ -50,11 +56,9 @@ void draw() {
   
   pushMatrix();
   // Translate and rotate
-  translate(width/2, height/2, -1500);
+  translate(width/2, height/3, -1500);
   rotateY(a);
   rotateX(b);
-  
-  grid.update();
   
   float xMin=1000, xMax=0, yMin=1000, yMax=0, zMin=1000, zMax=0;
   
@@ -68,6 +72,7 @@ void draw() {
       PVector v = depthToPointCloudPos(x, y, rawDepth);
       v.z-=2000;
       v.z*=-1;
+      v.y-=300;
       
       if (v.x < xMin) xMin= v.x;
       if (v.x > xMax) xMax= v.x;
@@ -94,6 +99,7 @@ void draw() {
     }
   }
   
+  grid.update();
   grid.display();
 
   // Rotate
@@ -114,6 +120,10 @@ void draw() {
  text(yMax, 5,70);
  text(zMin, 5,80);
  text(zMax, 5,90);
+ 
+ dial.setTarget(grid.numCubes);
+ dial.update();
+ dial.display();
  
 }
 

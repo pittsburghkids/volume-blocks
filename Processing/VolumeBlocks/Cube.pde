@@ -3,8 +3,10 @@ class Cube{
   PVector pos;
   boolean dead;
   boolean born;
-  int hereFrames;
+  boolean touched;
   int goneFrames;
+  int hereFrames;
+  int age;
   color c;
   
   Cube(PVector _pos, int _size){
@@ -12,38 +14,47 @@ class Cube{
     pos= _pos;
     dead= false;
     born= false;
-    hereFrames= 1;
-    goneFrames= 0;
-    int h= int(random(80));
-    c= color(255, h, h/2);
+    age= 0;
+    hereFrames=0;
+    goneFrames=0;
+    touched= true;
+    int h= int(random(60));
+    c= color(160+h, 10+h*0.8, 10+h*0.6);
   }
   
   void display(){
-    //if (!born) return;
+    if(!born) return;
+    if(age<5) return;
     pushMatrix();
     translate(pos.x, pos.y, pos.z);
     fill(c);
+    strokeWeight(2);
     box(size, size, size);
     popMatrix();
   }
   
   void update(){
-    goneFrames++;
-    if(goneFrames == 8) dead= true;
-    if(hereFrames > 10) born= true;
-    if( !born && goneFrames > 1 ) dead= true;
+    age++;
+    if(touched) hereFrames++;
+    if(!touched){
+      goneFrames++;
+      hereFrames= 0;
+      if (!born) dead= true;
+    }
+    if(hereFrames > 5) born= true;
+    if(goneFrames > 5) dead= true;
+    touched= false;
   }
   
   boolean isSame(PVector otherPos){
-    if(pos.x != otherPos.x) return false;
-    if(pos.y != otherPos.y) return false;
-    if(pos.z != otherPos.z) return false;
-    
+    if(int(pos.x) != int(otherPos.x)) return false;
+    if(int(pos.y) != int(otherPos.y)) return false;
+    if(int(pos.z) != int(otherPos.z)) return false;
     return true;
   }
   
   void touch(){
-    hereFrames++;
-    goneFrames= 0;
+    goneFrames=0;
+    touched= true;
   }
 }

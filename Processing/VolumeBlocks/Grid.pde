@@ -66,13 +66,13 @@ class Grid {
     int numDead= 0;
     for(int i=0; i<numCubes; i++){
       if (cubes[i].dead) numDead++;
-      if(i+numDead < numCubes) cubes[i]= cubes[i+numDead];
+      if (i+numDead < numCubes) cubes[i]= cubes[i+numDead];
     }
     numCubes= numCubes-numDead;
   }
   
   void display(){
-    stroke(120);
+    stroke(0);
     drawFloorLines();
     drawBox();
     
