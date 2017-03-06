@@ -113,7 +113,7 @@ void draw() {
  noLights();
  fill(255);
  text(frameRate, 5, 15);
- text(grid.numCubes, 5, 30);
+ text(grid.cubes.size(), 5, 30);
  text(xMin, 5,40);
  text(xMax, 5,50);
  text(yMin, 5,60);
@@ -121,7 +121,7 @@ void draw() {
  text(zMin, 5,80);
  text(zMax, 5,90);
  
- dial.setTarget(grid.numCubes);
+ dial.setTarget(grid.cubes.size());
  dial.update();
  dial.display();
  

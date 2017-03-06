@@ -6,9 +6,7 @@ class Grid {
   
   int cellSize= 60;
   
-  int maxCubes= 10000;
-  Cube[] cubes= new Cube[maxCubes];
-  int numCubes= 0;
+  ArrayList<Cube> cubes= new ArrayList<Cube>();;
   
   Grid(int _x, int _y, int _z){
     xSize= _x;
@@ -34,7 +32,6 @@ class Grid {
   }
   
   void addCube(PVector pos){
-    if (numCubes == maxCubes-1) return;
     
     float cellX= pos.x/cellSize;
     float cellY= pos.y/cellSize;
@@ -44,31 +41,28 @@ class Grid {
     pos.z= round(cellZ) * cellSize;
     
     boolean newCube= true;
-    for (int i=0; i<numCubes; i++){
-      if (cubes[i].isSame(pos)){
+    for (int i= 0; i < cubes.size(); i++){
+      Cube cube= cubes.get(i);
+      if (cube.isSame(pos)){
         newCube= false;
-        cubes[i].touch();
+        cube.touch();
       }
     }
-    if (newCube){
-      cubes[numCubes]= new Cube(pos, cellSize);
-      numCubes++;
-    }
+    if (newCube) cubes.add(new Cube(pos, cellSize));
   }
   
   void update(){
     // age cubes
-    for(int i=0; i<numCubes; i++){
-      cubes[i].update();
+    for(int i= 0; i < cubes.size(); i++){
+      Cube cube= cubes.get(i);
+      cube.update();
     }
     
     // remove dead cubes from array
-    int numDead= 0;
-    for(int i=0; i<numCubes; i++){
-      if (cubes[i].dead) numDead++;
-      if (i+numDead < numCubes) cubes[i]= cubes[i+numDead];
+    for(int i=0; i<cubes.size(); i++){
+      Cube cube= cubes.get(i);
+      if (cube.dead) cubes.remove(i);
     }
-    numCubes= numCubes-numDead;
   }
   
   void display(){
@@ -77,8 +71,9 @@ class Grid {
     drawBox();
     
     stroke(0);
-    for (int i=0; i < numCubes; i++){
-      cubes[i].display();
+    for (int i=0; i < cubes.size(); i++){
+      Cube cube= cubes.get(i);
+      cube.display();
     }
   }
   

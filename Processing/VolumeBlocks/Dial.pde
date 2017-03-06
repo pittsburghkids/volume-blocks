@@ -48,15 +48,6 @@ class Dial{
     int gradHeight= 100;
     int margin= 50;
     
-    // bezel
-    noStroke();
-    fill(0);
-    ellipse(centerX, centerY, dia+200, dia+200);
-    fill(202,9,5);
-    ellipse(centerX, centerY, dia+180, dia+180);
-    fill(0);
-    ellipse(centerX, centerY, dia+20, dia+20);
-    
     // face
     pushMatrix();
     translate(centerX, centerY);
@@ -107,20 +98,6 @@ class Dial{
     vertex(width/2+30, centerY-dia/2);
     vertex(width/2, centerY-dia/2+80);
     endShape(CLOSE);
-    
-    // label
-    stroke(0);
-    strokeWeight(gradWidth);
-    fill(c);
-    rect(width/2-200, centerY-dia/2-100, 400, 120, 25);
-    strokeWeight(1);
-    
-    textSize(60);
-    textAlign(CENTER);
-    fill(0);
-    text("CUPS", width/2, centerY-dia/2-30);
-    textAlign(LEFT);
-    textSize(10);
        
   }
 }
