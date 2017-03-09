@@ -39,7 +39,7 @@ void setup() {
 
 void draw() {
 
-  background(0,0,0);
+  background(107,95,77);
   fill(255);
   
   // Set up some different colored lights
@@ -71,23 +71,9 @@ void draw() {
       int rawDepth = depth[offset];
       //PVector v = depthToWorld(x, y, rawDepth);
       PVector v = depthToPointCloudPos(x, y, rawDepth);
-      v.z-=2500;
+      v.z-=2000;
       v.z*=-1;
-      v.y-=200;
-      
-// Rotate points to correct for sensor tilt
-//      Vector rotate(Vector v, Vector _axis,float ang)
-//      {
-//      Vector axis=new Vector(_axis.nx(),_axis.ny(),_axis.nz());
-//      Vector vnorm=new Vector(v.nx(),v.ny(),v.nz());
-//      float _parallel=Dot(axis,v);
-//      Vector parallel=multiply(axis,_parallel);
-//      Vector perp=subtract(parallel,v);
-//      Vector Cross=cross(v,axis);
-//      Vector result=add(parallel,add(multiply(Cross,sin(-ang)),multiply(perp,cos(-ang)))); 
-//      return result;
-//      } 
-      
+      v.y-=300;
       
       if (v.x < xMin) xMin= v.x;
       if (v.x > xMax) xMax= v.x;

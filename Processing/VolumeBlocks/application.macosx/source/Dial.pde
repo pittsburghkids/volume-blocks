@@ -74,8 +74,7 @@ class Dial{
     textSize(60);
     for (int i= 0; i < numVisible; i++){
       rect(0-gradWidth, -dia/2+margin, gradWidth, gradHeight);
-      int number= firstNumber + i * posIncPerGrad;
-      if(number>=0) text(number, -gradWidth/2, -dia/2+gradHeight+60+margin);
+      text(firstNumber + i * posIncPerGrad, -gradWidth/2, -dia/2+gradHeight+60+margin);
       rotate(radPerGrad);
     }
     textSize(10);

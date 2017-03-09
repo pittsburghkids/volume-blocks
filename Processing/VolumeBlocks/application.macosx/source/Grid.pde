@@ -78,21 +78,19 @@ class Grid {
   }
   
   void drawFloorLines(){
-    strokeWeight(2);
-    stroke(218,193,95);
     pushMatrix();
     translate( -(xSize*cellSize)/2, (ySize*cellSize)/2, -(zSize*cellSize)/2 );
-    translate(0, cellSize/2, -cellSize/2 );
+    translate( -cellSize/2, cellSize/2, -cellSize/2 );
     
     beginShape(LINES);
-    for(int i = 0; i <= (xSize)*cellSize; i+= cellSize*3){
+    for(int i = 0; i <= (xSize+1)*cellSize; i+= cellSize){
       vertex(i, 0, 0);
-      vertex(i, 0, (zSize)*cellSize);
+      vertex(i, 0, (zSize+1)*cellSize);
     }
   
-    for(int i = 0; i <= (zSize)*cellSize; i+= cellSize*3){
+    for(int i = 0; i <= (zSize+1)*cellSize; i+= cellSize){
       vertex(0, 0, i);
-      vertex((xSize)*cellSize, 0, i);
+      vertex((xSize+1)*cellSize, 0, i);
     }
     endShape();
     
@@ -111,32 +109,32 @@ class Grid {
     beginShape(LINES);
     
     // posts
-//    vertex(0,0,0);
-//    vertex(0,yDim,0);
+    vertex(0,0,0);
+    vertex(0,yDim,0);
     
-//    vertex(xDim,0,0);
-//    vertex(xDim,yDim,0);
+    vertex(xDim,0,0);
+    vertex(xDim,yDim,0);
     
-//    vertex(0,0,zDim);
-//    vertex(0,yDim,zDim);
+    vertex(0,0,zDim);
+    vertex(0,yDim,zDim);
     
-//    vertex(xDim,0,zDim);
-//    vertex(xDim,yDim,zDim);
+    vertex(xDim,0,zDim);
+    vertex(xDim,yDim,zDim);
     
     // upper box
-//    vertex(0,yDim,0);
-//    vertex(xDim, yDim, 0);
+    vertex(0,yDim,0);
+    vertex(xDim, yDim, 0);
     
-//    vertex(xDim,yDim,0);
-//    vertex(xDim, yDim, zDim);
+    vertex(xDim,yDim,0);
+    vertex(xDim, yDim, zDim);
     
-//    vertex(xDim, yDim, zDim);
-//    vertex(0, yDim, zDim);
+    vertex(xDim, yDim, zDim);
+    vertex(0, yDim, zDim);
     
-//    vertex(0, yDim, zDim);
-//    vertex(0,yDim,0);
+    vertex(0, yDim, zDim);
+    vertex(0,yDim,0);
     
-//    endShape();    
+    endShape();    
     
     popMatrix();
   }
