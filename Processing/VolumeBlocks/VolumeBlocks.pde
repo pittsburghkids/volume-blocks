@@ -4,10 +4,10 @@
 
 // https://github.com/shiffman/OpenKinect-for-Processing
 // http://shiffman.net/p5/kinect/
-
 import org.openkinect.freenect.*;
 import org.openkinect.freenect2.*;
 import org.openkinect.processing.*;
+
 
 // Kinect Library object
 Kinect2 kinect;
@@ -26,11 +26,13 @@ void setup() {
   // Rendering in P3D
   //size(800, 600, P3D);
   //Exhibit resolution: 1920 x 1080
+  
+
   fullScreen(P3D);
   kinect = new Kinect2(this);
   kinect.initDepth();
   kinect.initDevice();
-  
+
   font= loadFont("TwCenMTPro-SemiBold-60.vlw");
   textFont(font);
   dial.init();
@@ -39,9 +41,14 @@ void setup() {
 
 void draw() {
 
-  background(0,0,0);
-  fill(255);
   
+  background(234,217,164); //lightest
+  //background(233,207,110); //darkest
+  fill(255,100);
+   rect(0, height - 514, width, height);
+  
+  fill(0);
+  smooth();
   // Set up some different colored lights
   pointLight(255, 255, 255, -65, -60, -100); 
   pointLight(200, 200, 200, width+65, -60, 150);
@@ -127,6 +134,7 @@ void draw() {
  
  noLights();
  fill(255);
+ /*
  text(frameRate, 5, 15);
  text(grid.cubes.size(), 5, 30);
  text(xMin, 5,40);
@@ -135,11 +143,11 @@ void draw() {
  text(yMax, 5,70);
  text(zMin, 5,80);
  text(zMax, 5,90);
- 
+ */
  dial.setTarget(grid.cubes.size());
  dial.update();
  dial.display();
- 
+
 }
 
 //calculte the xyz camera position based on the depth data
